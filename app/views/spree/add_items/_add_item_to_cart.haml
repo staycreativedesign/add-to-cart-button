@@ -1,0 +1,17 @@
+- variant = Spree::Variant.find(variant_id)
+%table.table.striped
+  %tr
+  = form_tag quick_add_path, method: :post do
+    = hidden_field_tag :variant, variant_id
+    %td
+      = variant.name
+    %td.price{width: "25%"}
+      %strong
+        = "$#{variant.price}"
+    %td{width: "25%"}
+      -# = submit_tag
+      -# %button#add-to-cart-button.btn.btn-primary.w-100.text-uppercase.font-weight-bold.add-to-cart-button{:name => "button", :type => "submit"}
+        Add To Cart
+
+
+

@@ -1,0 +1,41 @@
+- current_page_name = 'Parts and Accessories'
+#page_content.mt-4.mb-4
+  .container
+    .row
+      %nav#breadcrumbs.col-12.mt-1.mt-sm-3.mt-lg-4
+        %ol.breadcrumb
+          %li.breadcrumb-item
+            %span
+              = link_to Spree.t('plp.home'), spree.root_path
+            %li.breadcrumb-item
+              = current_page_name
+.container
+  - @categories.children.each do |children|
+    .row
+      .col-sm-12
+        %h2
+          = children.name
+          -# = render partial: 'add_item_to_cart', locals: { variant_id: product.variants.first.id, name: product.name, price: product.variants.first }
+        - children.products.each do |product|
+          - variant_id = Spree::Variant.find(product.variants.first.id)
+          - variant = Spree::Variant.find(variant_id.id)
+          %table.table.striped
+            %tr
+            = form_tag quick_add_path, method: :post do
+              = hidden_field_tag :variant, variant.id
+              %td
+                = variant.name
+              %td.price{width: "25%"}
+                %strong
+                  = "$#{variant.price}"
+              %td{width: "25%"}
+                = submit_tag
+                -# %button#add-to-cart-button.btn.btn-primary.w-100.text-uppercase.font-weight-bold.add-to-cart-button{:name => "button", :type => "submit"}
+                  Add To Cart
+
+
+
+
+
+
+
